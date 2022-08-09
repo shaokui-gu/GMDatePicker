@@ -9,7 +9,7 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-struct GMDatePickerView : UIViewRepresentable {
+public struct GMDatePickerView : UIViewRepresentable {
     @Binding var date:Date
     let initialDate:Date
     let limit:ClosedRange<Date>?
@@ -24,7 +24,7 @@ struct GMDatePickerView : UIViewRepresentable {
         self.enableNoYear = enableNoYear
     }
     
-    func makeUIView(context: Context) -> GMDatePicker {
+    public func makeUIView(context: Context) -> GMDatePicker {
         let datePicker = GMDatePicker(Date(), type: self.type, enableNoYear: self.enableNoYear, limit: self.limit)
         datePicker.date = initialDate
         datePicker.onChangedCallBack = { date in
@@ -33,13 +33,13 @@ struct GMDatePickerView : UIViewRepresentable {
         return datePicker
     }
     
-    func updateUIView(_ uiView: GMDatePicker, context: Context) {
+    public func updateUIView(_ uiView: GMDatePicker, context: Context) {
         if date != uiView.date {
             uiView.scrollToDate(date)
         }
     }
     
-    typealias UIViewType = GMDatePicker
+    public typealias UIViewType = GMDatePicker
 }
 
 @available(iOS 13.0, *)
