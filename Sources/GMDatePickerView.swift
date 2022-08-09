@@ -16,7 +16,7 @@ public struct GMDatePickerView : UIViewRepresentable {
     let type:GMCalendarType
     let enableNoYear:Bool
     
-    init(_ date:Binding<Date>, type: GMCalendarType = .gregorian, enableNoYear:Bool = false, limit:ClosedRange<Date>? = nil) {
+    public init(_ date:Binding<Date>, type: GMCalendarType = .gregorian, enableNoYear:Bool = false, limit:ClosedRange<Date>? = nil) {
         self._date = date
         self.initialDate = date.wrappedValue
         self.type = type
