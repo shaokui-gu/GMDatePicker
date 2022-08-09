@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "GMDatePicker"
-  s.version      = "0.0.9"
+  s.version      = "0.1.0"
   s.summary      = "A Custom DatePicker supports chinese lunar calendar"
   s.homepage     = "https://github.com/shaokui-gu/GMDatePicker"
   s.license      = 'MIT'
