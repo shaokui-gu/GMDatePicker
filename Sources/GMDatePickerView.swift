@@ -16,6 +16,8 @@ public struct GMDatePickerView : UIViewRepresentable {
     let type:GMCalendarType
     let enableNoYear:Bool
     
+    @State var locale:Locale = .init(identifier: "zh_CN")
+    
     public init(_ date:Binding<Date>, type: GMCalendarType = .gregorian, enableNoYear:Bool = false, limit:ClosedRange<Date>? = nil) {
         self._date = date
         self.initialDate = date.wrappedValue
@@ -25,7 +27,7 @@ public struct GMDatePickerView : UIViewRepresentable {
     }
     
     public func makeUIView(context: Context) -> GMDatePicker {
-        let datePicker = GMDatePicker(Date(), type: self.type, enableNoYear: self.enableNoYear, limit: self.limit)
+        let datePicker = GMDatePicker(Date(), type: self.type, locale: self.locale, enableNoYear: self.enableNoYear, limit: self.limit)
         datePicker.date = initialDate
         datePicker.onChangedCallBack = { date in
             self.date = date
@@ -37,9 +39,17 @@ public struct GMDatePickerView : UIViewRepresentable {
         if date != uiView.date {
             uiView.scrollToDate(date)
         }
+        if locale.identifier != uiView.locale.identifier {
+            uiView.locale = locale
+        }
     }
     
     public typealias UIViewType = GMDatePicker
+    
+    public func locale(_ locale:Locale) -> Self {
+        self.locale = locale
+        return self
+    }
 }
 
 @available(iOS 13.0, *)
@@ -47,7 +57,7 @@ struct GMDatePickerView_Previews : PreviewProvider {
     @State static var date:Date = Date()
     static var previews : some View {
         GMDatePickerView($date)
+            .locale(.init(identifier: "en_US"))
             .preferredColorScheme(.light)
-            .environment(\.locale, .init(identifier: "en"))
     }
 }

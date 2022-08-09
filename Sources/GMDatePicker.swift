@@ -172,6 +172,16 @@ public class GMDatePicker : UIView {
         }
     }
     
+    var locale:Locale {
+        get {
+            return caculator.locale
+        }
+        set {
+            caculator.locale = newValue
+            self.pickerView.reloadAllComponents()
+        }
+    }
+    
     var type:GMCalendarType {
         didSet {
             pickerView.reloadAllComponents()
@@ -194,8 +204,9 @@ public class GMDatePicker : UIView {
         }
     }
 
-    init(_ initialDate:Date = Date(), type:GMCalendarType = .gregorian, enableNoYear:Bool = false, limit:ClosedRange<Date>? = nil) {
+    init(_ initialDate:Date = Date(), type:GMCalendarType = .gregorian, locale:Locale = Locale(identifier: "zh_CN"), enableNoYear:Bool = false, limit:ClosedRange<Date>? = nil) {
         caculator = GMDatePickerCaculator()
+        caculator.locale = locale
         var calendar:Calendar
         if type == .lunar {
             calendar = Calendar.init(identifier: .chinese)
