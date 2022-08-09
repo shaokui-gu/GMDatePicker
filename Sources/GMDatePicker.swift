@@ -9,18 +9,6 @@
 import Foundation
 import UIKit
 
-private extension String {
-    var datePickerLocalized: String {
-        guard let path = Bundle.main.path(forResource: "GMDatePicker", ofType: "bundle") else {
-            return self
-        }
-        if let bundle = Bundle(path: path) {
-            return NSLocalizedString(self, bundle: bundle, comment: self)
-        }
-        return self
-    }
-}
-
 private extension Date {
     
     var components : DateComponents {
@@ -63,6 +51,26 @@ public class GMDatePickerCaculator {
     var maxYear:Int = 2099
     var minDate:Date = DateComponents(calendar:Calendar.current, year: 1, month: 1, day: 1).date!
     
+    var locale:Locale = Locale.init(identifier: "zh_CN")
+    
+    private var localBundlePath:String? = Bundle.main.path(forResource: "GMDatePicker", ofType: "bundle")
+    
+    private func datePickerLocalized(_ str:String) -> String {
+        guard let path = localBundlePath else {
+            return str
+        }
+        if locale.identifier == "zh_CN" {
+            if let bundle = Bundle(path: "\(path)/zh-Hans.lproj") {
+                return NSLocalizedString(str, bundle: bundle, comment: str)
+            }
+        } else {
+            if let bundle = Bundle(path: "\(path)/en.lproj") {
+                return NSLocalizedString(str, bundle: bundle, comment: str)
+            }
+        }
+        return str
+    }
+    
     lazy var lunarFormatter:DateFormatter = {
         let chinese = Calendar(identifier: .chinese)
         let formatter = DateFormatter()
@@ -92,7 +100,7 @@ public class GMDatePickerCaculator {
         } else {
             /// 公历
             let day = date.day
-            return "\(day)日".datePickerLocalized
+            return self.datePickerLocalized("\(day)日")
         }
     }
     
@@ -104,7 +112,7 @@ public class GMDatePickerCaculator {
         } else {
             /// 公历
             let month = date.month
-            return "\(month)月".datePickerLocalized
+            return self.datePickerLocalized("\(month)月")
         }
     }
     
@@ -116,7 +124,7 @@ public class GMDatePickerCaculator {
         } else {
             /// 公历
             let year = date.year
-            return "\(year)\("年".datePickerLocalized)"
+            return "\(year)\(self.datePickerLocalized("年"))"
         }
     }
     
