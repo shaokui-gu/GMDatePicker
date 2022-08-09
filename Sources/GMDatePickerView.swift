@@ -16,7 +16,7 @@ public struct GMDatePickerView : UIViewRepresentable {
     let type:GMCalendarType
     let enableNoYear:Bool
     
-    @State var locale:Locale = .init(identifier: "zh_CN")
+    let locale:Locale
     
     public init(_ date:Binding<Date>, type: GMCalendarType = .gregorian, locale:Locale = .init(identifier: "zh_CN"),  enableNoYear:Bool = false, limit:ClosedRange<Date>? = nil) {
         self._date = date
