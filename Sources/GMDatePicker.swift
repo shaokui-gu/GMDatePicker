@@ -158,7 +158,7 @@ public class GMDatePicker : UIView {
     
     let calendar:Calendar
     
-    var onChangedCallBack:((Date) -> Void)?
+    public var onChangedCallBack:((Date) -> Void)?
     
     private var _date:Date
     
@@ -250,6 +250,7 @@ public class GMDatePicker : UIView {
         pickerView.dataSource = self
         addSubview(pickerView)
         pickerView.reloadAllComponents()
+        self.scrollToDate(initialDate, animated: false)
     }
     
     public override func layoutSubviews() {
