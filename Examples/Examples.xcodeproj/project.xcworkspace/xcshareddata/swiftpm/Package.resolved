@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "gmdatepicker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/shaokui-gu/GMDatePicker.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "bba1524af587398e7ed4a3e626f819dbb58c8aea"
+      }
+    }
+  ],
+  "version" : 2
+}

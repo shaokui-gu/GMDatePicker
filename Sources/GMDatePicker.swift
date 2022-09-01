@@ -45,7 +45,7 @@ private extension Date {
     }
 }
 
-public class GMDatePickerCaculator {
+class GMDatePickerCaculator {
     
     var minYear:Int = 1
     var maxYear:Int = 2099
@@ -204,7 +204,7 @@ public class GMDatePicker : UIView {
         }
     }
 
-    init(_ initialDate:Date = Date(), type:GMCalendarType = .gregorian, locale:Locale = Locale(identifier: "zh_CN"), enableNoYear:Bool = false, limit:ClosedRange<Date>? = nil) {
+    public init(_ initialDate:Date = Date(), type:GMCalendarType = .gregorian, locale:Locale = Locale(identifier: "zh_CN"), enableNoYear:Bool = false, limit:ClosedRange<Date>? = nil) {
         caculator = GMDatePickerCaculator()
         caculator.locale = locale
         var calendar:Calendar
@@ -256,7 +256,7 @@ public class GMDatePicker : UIView {
         pickerView.frame = self.bounds
     }
     
-    required public init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
