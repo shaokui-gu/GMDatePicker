@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/shaokui-gu/GMDatePicker.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "2618c24bbbd5d7fb29da6310a091fcbf4e0354b2"
+        "revision" : "7f834b2d87dc2e59eb5af34a6f9e444314ea497d",
+        "version" : "0.1.3"
       }
     }
   ],

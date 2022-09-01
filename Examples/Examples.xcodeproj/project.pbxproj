@@ -16,7 +16,7 @@
 		79F2154728C0B4EB007F8425 /* ExamplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2154628C0B4EB007F8425 /* ExamplesTests.swift */; };
 		79F2155128C0B4EB007F8425 /* ExamplesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2155028C0B4EB007F8425 /* ExamplesUITests.swift */; };
 		79F2155328C0B4EB007F8425 /* ExamplesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2155228C0B4EB007F8425 /* ExamplesUITestsLaunchTests.swift */; };
-		79F2156128C0B503007F8425 /* GMDatePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 79F2156028C0B503007F8425 /* GMDatePicker */; };
+		79F2156D28C0C5D7007F8425 /* GMDatePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 79F2156C28C0C5D7007F8425 /* GMDatePicker */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79F2156128C0B503007F8425 /* GMDatePicker in Frameworks */,
+				79F2156D28C0C5D7007F8425 /* GMDatePicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +146,7 @@
 			);
 			name = Examples;
 			packageProductDependencies = (
-				79F2156028C0B503007F8425 /* GMDatePicker */,
+				79F2156C28C0C5D7007F8425 /* GMDatePicker */,
 			);
 			productName = Examples;
 			productReference = 79F2152C28C0B4EA007F8425 /* Examples.app */;
@@ -221,7 +221,7 @@
 			);
 			mainGroup = 79F2152328C0B4EA007F8425;
 			packageReferences = (
-				79F2155F28C0B503007F8425 /* XCRemoteSwiftPackageReference "GMDatePicker" */,
+				79F2156B28C0C5D7007F8425 /* XCRemoteSwiftPackageReference "GMDatePicker" */,
 			);
 			productRefGroup = 79F2152D28C0B4EA007F8425 /* Products */;
 			projectDirPath = "";
@@ -606,20 +606,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		79F2155F28C0B503007F8425 /* XCRemoteSwiftPackageReference "GMDatePicker" */ = {
+		79F2156B28C0C5D7007F8425 /* XCRemoteSwiftPackageReference "GMDatePicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/shaokui-gu/GMDatePicker.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		79F2156028C0B503007F8425 /* GMDatePicker */ = {
+		79F2156C28C0C5D7007F8425 /* GMDatePicker */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 79F2155F28C0B503007F8425 /* XCRemoteSwiftPackageReference "GMDatePicker" */;
+			package = 79F2156B28C0C5D7007F8425 /* XCRemoteSwiftPackageReference "GMDatePicker" */;
 			productName = GMDatePicker;
 		};
 /* End XCSwiftPackageProductDependency section */

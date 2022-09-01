@@ -220,7 +220,7 @@ public class GMDatePicker : UIView {
                 caculator.minYear = newMinDate.year
                 caculator.maxYear = newMinDate.year + (uper.year - lower.year)
             } else {
-                caculator.minDate = minDate.addYear(by: -1984)
+                caculator.minDate = minDate.addYear(by: -1983, in: calendar)
                 caculator.minYear = 1
                 caculator.maxYear = 2099
             }
@@ -424,15 +424,11 @@ extension GMDatePicker : UIPickerViewDelegate, UIPickerViewDataSource {
         if self.pickerView.numberOfRows(inComponent: 0) > yearRow {
             self.pickerView.selectRow(yearRow, inComponent: 0, animated: animated)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            if self.pickerView.numberOfRows(inComponent: 1) > monthRow {
-                self.pickerView.selectRow(monthRow, inComponent: 1, animated: animated)
-            }
+        if self.pickerView.numberOfRows(inComponent: 1) > monthRow {
+            self.pickerView.selectRow(monthRow, inComponent: 1, animated: animated)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            if self.pickerView.numberOfRows(inComponent: 2) > dayRow {
-                self.pickerView.selectRow(dayRow, inComponent: 2, animated: animated)
-            }
+        if self.pickerView.numberOfRows(inComponent: 2) > dayRow {
+            self.pickerView.selectRow(dayRow, inComponent: 2, animated: animated)
         }
     }
 }
