@@ -8,6 +8,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/shaokui-gu/GMDatePicker.git" }
   s.source_files = 'Sources/*.swift'
   s.resource_bundles = { 'GMDatePicker' => [ 'Sources/GMDatePicker.bundle/*' ] }
-  s.swift_versions = ['5.2', '5.3', '5.4', '5.5', '5.6']
+  s.swift_versions = ['5.2', '5.3', '5.4']
   s.requires_arc = true
 end
