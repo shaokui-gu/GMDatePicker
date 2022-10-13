@@ -249,8 +249,10 @@ public class GMDatePicker : UIView {
         pickerView.delegate = self
         pickerView.dataSource = self
         addSubview(pickerView)
-        pickerView.reloadAllComponents()
-        self.scrollToDate(initialDate, animated: false)
+        self.scrollToDate(initialDate, noYear: self.enableNoYear, animated: false)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.pickerView.reloadAllComponents()
+        }
     }
     
     public override func layoutSubviews() {
@@ -301,14 +303,24 @@ extension GMDatePicker : UIPickerViewDelegate, UIPickerViewDataSource {
         } else if component == 1 {
             let yearRow = pickerView.selectedRow(inComponent: 0)
             let yearAddition = (yearRow == yearCount) ? 0 : yearRow
-            let caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1984, month: 2, day: 2).date! : self.caculator.minDate
+            let caculateDate:Date
+            if self.type == .lunar {
+                caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1984, month: 2, day: 2).date! : self.caculator.minDate
+            } else {
+                caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1, month: 1, day: 1).date! : self.caculator.minDate
+            }
             let mewDate = caculateDate.addYear(by: yearAddition, in: self.calendar).addMonth(by: row, in: self.calendar)
             title = self.caculator.monthTitle(date: mewDate, calendar: self.calendar)
         } else {
             let yearRow = pickerView.selectedRow(inComponent: 0)
             let yearAddition = (yearRow == yearCount) ? 0 : yearRow
             let monthAddition = pickerView.selectedRow(inComponent: 1)
-            let caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1984, month: 2, day: 2).date! : self.caculator.minDate
+            let caculateDate:Date
+            if self.type == .lunar {
+                caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1984, month: 2, day: 2).date! : self.caculator.minDate
+            } else {
+                caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1, month: 1, day: 1).date! : self.caculator.minDate
+            }
             let date = caculateDate.addYear(by: yearAddition, in: self.calendar).addMonth(by: monthAddition, in: self.calendar).addDay(by: row, in: self.calendar)
             title = self.caculator.dayTitle(date: date, calendar: self.calendar)
         }
@@ -322,14 +334,24 @@ extension GMDatePicker : UIPickerViewDelegate, UIPickerViewDataSource {
         } else if component == 1 {
             let yearRow = pickerView.selectedRow(inComponent: 0)
             let yearAddition = (yearRow == yearCount) ? 0 : yearRow
-            let caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1984, month: 2, day: 2).date! : self.caculator.minDate
+            let caculateDate:Date
+            if self.type == .lunar {
+                caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1984, month: 2, day: 2).date! : self.caculator.minDate
+            } else {
+                caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1, month: 1, day: 1).date! : self.caculator.minDate
+            }
             let mewDate = caculateDate.addYear(by: yearAddition, in: self.calendar)
             return self.caculator.monthsIn(date: mewDate, calendar: self.calendar)
         } else {
             let yearRow = pickerView.selectedRow(inComponent: 0)
             let yearAddition = (yearRow == yearCount) ? 0 : yearRow
             let monthAddition = pickerView.selectedRow(inComponent: 1)
-            let caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1984, month: 2, day: 2).date! : self.caculator.minDate
+            let caculateDate:Date
+            if self.type == .lunar {
+                caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1984, month: 2, day: 2).date! : self.caculator.minDate
+            } else {
+                caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1, month: 1, day: 1).date! : self.caculator.minDate
+            }
             let mewDate = caculateDate.addYear(by: yearAddition, in: self.calendar).addMonth(by: monthAddition, in: self.calendar)
             return self.caculator.daysIn(date: mewDate, calendar: self.calendar)
         }
@@ -366,7 +388,12 @@ extension GMDatePicker : UIPickerViewDelegate, UIPickerViewDataSource {
                 let yearRow = pickerView.selectedRow(inComponent: 0)
                 let dayAddition = pickerView.selectedRow(inComponent: 2)
                 let yearAddition = (yearRow == yearCount) ? 0 : yearRow
-                let caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1984, month: 2, day: 2).date! : self.caculator.minDate
+                let caculateDate:Date
+                if self.type == .lunar {
+                    caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1984, month: 2, day: 2).date! : self.caculator.minDate
+                } else {
+                    caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1, month: 1, day: 1).date! : self.caculator.minDate
+                }
                 let date = caculateDate.addYear(by: yearAddition, in: self.calendar).addMonth(by: row, in: self.calendar).addDay(by: dayAddition, in: self.calendar)
                 self.updateDate(date)
                 self.onChangedCallBack?(self.date)
@@ -376,7 +403,12 @@ extension GMDatePicker : UIPickerViewDelegate, UIPickerViewDataSource {
                 let yearRow = pickerView.selectedRow(inComponent: 0)
                 let yearAddition = (yearRow == yearCount) ? 0 : yearRow
                 let monthAddition = pickerView.selectedRow(inComponent: 1)
-                let caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1984, month: 2, day: 2).date! : self.caculator.minDate
+                let caculateDate:Date
+                if self.type == .lunar {
+                    caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1984, month: 2, day: 2).date! : self.caculator.minDate
+                } else {
+                    caculateDate =  (yearRow == yearCount) ? DateComponents(calendar:Calendar.current, year: 1, month: 1, day: 1).date! : self.caculator.minDate
+                }
                 let date = caculateDate.addYear(by: yearAddition, in: self.calendar).addMonth(by: monthAddition, in: self.calendar).addDay(by: row, in: self.calendar)
                 self.updateDate(date)
                 self.onChangedCallBack?(self.date)
@@ -397,7 +429,7 @@ extension GMDatePicker : UIPickerViewDelegate, UIPickerViewDataSource {
         self._date = date
     }
     
-    func scrollToDate(_ date:Date, animated:Bool = true) {
+    func scrollToDate(_ date:Date, noYear:Bool = false, animated:Bool = true) {
         if let limit = self.limit {
             if date < limit.lowerBound {
                 self._scrollToDate(date: limit.lowerBound, animated: animated)
@@ -407,18 +439,32 @@ extension GMDatePicker : UIPickerViewDelegate, UIPickerViewDataSource {
                 return
             }
         }
-        self._scrollToDate(date: date, animated: animated)
+        self._scrollToDate(date: date, noYear: noYear, animated: animated)
     }
     
-    private func _scrollToDate(date:Date, animated:Bool = true) {
+    private func _scrollToDate(date:Date, noYear:Bool = false, animated:Bool = true) {
         let year = date.year
-        let yearRow = year - self.caculator.minYear
+        let calendarYear = date.dateComponents(in:self.calendar).year!
+        var yearRow = year - self.caculator.minYear
+        if noYear, enableNoYear {
+            if calendarYear == 1 {
+                yearRow = self.caculator.maxYear - self.caculator.minYear + 1
+            }
+        }
         var monthRow:Int
         let components = date.dateComponents(in: self.calendar)
         if components.isLeapMonth ?? false {
             monthRow = components.month!
         } else {
-            monthRow = components.month! - 1
+            if let leapMonth = self.caculator.leapMonthAt(date: date) {
+                if leapMonth < components.month! {
+                    monthRow = components.month!
+                } else {
+                    monthRow = components.month! - 1
+                }
+            } else {
+                monthRow = components.month! - 1
+            }
         }
         let dayRow = components.day! - 1
         if self.pickerView.numberOfRows(inComponent: 0) > yearRow {
