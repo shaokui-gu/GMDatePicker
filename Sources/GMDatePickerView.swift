@@ -28,8 +28,7 @@ public struct GMDatePickerView : UIViewRepresentable {
     }
     
     public func makeUIView(context: Context) -> GMDatePicker {
-        let datePicker = GMDatePicker(Date(), type: self.type, locale: self.locale, enableNoYear: self.enableNoYear, limit: self.limit)
-        datePicker.date = initialDate
+        let datePicker = GMDatePicker(initialDate, type: self.type, locale: self.locale, enableNoYear: self.enableNoYear, limit: self.limit)
         datePicker.onChangedCallBack = { date in
             self.date = date
         }
